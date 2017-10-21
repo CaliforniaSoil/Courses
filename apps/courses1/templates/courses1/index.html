@@ -1,0 +1,42 @@
+<html>
+    <header>
+        <title>Courses</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </header>
+    <body>
+        <form action="/process" method="post">
+            {% csrf_token %}
+            <h2>Add a new course</h2>
+            <p> Name: </p>
+            <input type="text" name="name">
+            <p> Description: </p>
+            <textarea name="description"></textarea>
+            <br>
+            <input type="submit" value="Add">
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Courses</th>
+                    <th>Description</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.description }}</td>
+                    <td>{{ course.date_added }}</td>
+                    <td><a href='{{ course.id }}/remove'>Remove</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
